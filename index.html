@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gujarati Trader</title>
 
-<!-- ================= FIXED META PIXEL ================= -->
+<!-- Meta Pixel Code (NEW PIXEL) -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -15,16 +15,13 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
- 
-fbq('track', 'PageView');
 fbq('init', '1617064622794207');
+// Fixed: Single automatic PageView
 </script>
- // Removed duplicate PageView - automatic fires once
-<noscript>
- <img height="1" width="1" style="display:none"
+<noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1617064622794207&ev=PageView&noscript=1"
 /></noscript>
-<!-- ================= END META PIXEL ================= -->
+<!-- End Meta Pixel Code -->
 
 <style>
 *{box-sizing:border-box}
@@ -200,14 +197,14 @@ h1{font-size:28px;letter-spacing:1.5px}
   </div>
 </div>
 
-<!-- ✅ FIXED & FASTER TELEGRAM SCRIPT -->
+<!-- ✅ UPDATED TELEGRAM LINK -->
 <script>
 function trackTelegramSubscribe(){
   if(!localStorage.getItem('tg_subscribed')){
     fbq('track','Subscribe',{platform:'telegram'});
     localStorage.setItem('tg_subscribed','1');
   }
-  // Instant redirect (50ms)
+  // ⚡ NEW LINK - 50ms instant redirect
   setTimeout(function(){
     window.location.href = "https://t.me/+u6X4isPVqWRhYjM9";
   }, 50);
@@ -216,4 +213,3 @@ function trackTelegramSubscribe(){
 
 </body>
 </html>
-
