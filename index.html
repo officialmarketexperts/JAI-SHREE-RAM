@@ -21,12 +21,8 @@ s.parentNode.insertBefore(t,s)
 }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
 fbq('init','887037350795261');
+fbq('track','PageView');
 </script>
-
-<noscript>
-<img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=887037350795261&ev=PageView&noscript=1"/>
-</noscript>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -78,10 +74,6 @@ body{
   transition:.25s ease;
 }
 .cta i{margin-right:8px}
-.cta:hover{
-  transform:translateY(-3px) scale(1.03);
-  box-shadow:0 0 40px rgba(255,215,0,.9);
-}
 
 .hero h1{
   font-size:32px;
@@ -132,31 +124,16 @@ body{
   background:linear-gradient(180deg,#0f1629,#060914);
   padding:18px;
   border-radius:18px;
-  box-shadow:0 0 25px rgba(0,0,0,.6);
-}
-.stat i{
-  font-size:22px;
-  color:#00c6ff;
-  margin-bottom:6px;
-}
-.stat h3{
-  font-size:18px;
-  font-weight:900;
-}
-.stat p{
-  font-size:12px;
-  color:#aaa;
 }
 
 .disclaimer{
   padding:26px 18px;
   font-size:12.5px;
   color:#aaa;
-  line-height:1.6;
 }
 
 .footer{
-  padding:18px 10px;
+  padding:18px;
   font-size:13px;
   color:#888;
 }
@@ -167,13 +144,13 @@ body{
 
 <section class="hero">
 
-<img src="https://uploads.onecompiler.io/4479c7wrg/44h9psd4g/Screenshot%202026-03-24%20131151.png">
+<img src="https://res.cloudinary.com/dqhbtoh8u/image/upload/v1774449836/WhatsApp_Image_2025-12-29_at_18.24.42_mklank.jpg">
 
 <div class="trader-name">
 🤴𝐀𝐌𝐈𝐓 𝐓𝐑𝐀𝐃𝐄𝐑🤴 STOCK MARKET KING
 </div>
 
-<a href="https://t.me/+w68T44kr1QU2YjFl" target="_blank" class="cta subscribe-btn">
+<a href="https://t.me/+w68T44kr1QU2YjFl" class="cta subscribe-btn">
 <i class="fab fa-telegram-plane"></i> JOIN OUR TELEGRAM
 </a>
 
@@ -202,27 +179,13 @@ body{
 
 <div class="point">
 <i class="fa-solid fa-bolt"></i>
-<span>Live Market Updates, News Impact & Trend Analysis</span>
+<span>Live Market Updates & Trend Analysis</span>
 </div>
 
 <div class="stats">
-<div class="stat">
-<i class="fa-solid fa-indian-rupee-sign"></i>
-<h3>Equity</h3>
-<p>Cash Market Trades</p>
-</div>
-
-<div class="stat">
-<i class="fa-solid fa-layer-group"></i>
-<h3>Options</h3>
-<p>NIFTY & BANKNIFTY</p>
-</div>
-
-<div class="stat">
-<i class="fa-solid fa-clock"></i>
-<h3>Daily</h3>
-<p>Market Analysis</p>
-</div>
+<div class="stat"><i class="fa-solid fa-indian-rupee-sign"></i><h3>Equity</h3></div>
+<div class="stat"><i class="fa-solid fa-layer-group"></i><h3>Options</h3></div>
+<div class="stat"><i class="fa-solid fa-clock"></i><h3>Daily</h3></div>
 </div>
 
 </div>
@@ -230,62 +193,41 @@ body{
 
 <div class="disclaimer">
 Stock market investments are subject to market risks.  
-This community is for educational purposes only.  
-Please trade responsibly.
+Educational purpose only.
 </div>
 
 <div class="footer">
-© 2026 Gujarati Trader • All Rights Reserved
+© 2026 Gujarati Trader
 </div>
 
-<!-- ✅ FIXED TRACKING SCRIPT -->
+<!-- ✅ ONLY TRACKING FIX -->
 <script>
-const PAGEVIEW_KEY = "gt_pageview_tracked";
-const SUBSCRIBE_KEY = "gt_subscribe_tracked";
+const KEY = "gt_subscribe_tracked";
+const btn = document.querySelector(".subscribe-btn");
 
-function setCookie(name, value, days) {
-    let expires = "";
-    if (days) {
-        let date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + value + "; path=/" + expires;
+function setCookie(name,value,days){
+ let d=new Date();
+ d.setTime(d.getTime()+days*24*60*60*1000);
+ document.cookie=name+"="+value+";expires="+d.toUTCString()+";path=/";
+}
+function getCookie(name){
+ let n=name+"=";
+ return document.cookie.split(';').map(c=>c.trim()).find(c=>c.indexOf(n)==0)?.substring(n.length);
 }
 
-function getCookie(name) {
-    let nameEQ = name + "=";
-    let ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i].trim();
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
-    }
-    return null;
-}
+btn.addEventListener("click",function(e){
 
-// PAGEVIEW (ONE TIME)
-if (!localStorage.getItem(PAGEVIEW_KEY) && !getCookie(PAGEVIEW_KEY)) {
-    fbq('track', 'PageView');
-    localStorage.setItem(PAGEVIEW_KEY, "true");
-    setCookie(PAGEVIEW_KEY, "true", 30);
-}
+ // already tracked → no event
+ if(localStorage.getItem(KEY) || getCookie(KEY)){
+   return; // normal redirect hone do
+ }
 
-// LEAD (ONE DEVICE = ONE FIRE)
-document.querySelector(".subscribe-btn").addEventListener("click", function () {
+ // first time → fire events
+ fbq('track','Lead',{content_name:'Telegram Join'});
+ fbq('track','Subscribe',{content_name:'Telegram Subscribe'});
 
-    if (!localStorage.getItem(SUBSCRIBE_KEY) && !getCookie(SUBSCRIBE_KEY)) {
-
-        fbq('track', 'Lead', {
-            content_name: 'Telegram Join',
-            value: 10,
-            currency: 'INR'
-        });
-
-        fbq('trackCustom', 'TelegramSubscribe');
-
-        localStorage.setItem(SUBSCRIBE_KEY, "true");
-        setCookie(SUBSCRIBE_KEY, "true", 30);
-    }
+ localStorage.setItem(KEY,"true");
+ setCookie(KEY,"true",30);
 
 });
 </script>
